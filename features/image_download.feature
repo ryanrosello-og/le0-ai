@@ -5,4 +5,4 @@ Feature: Download image
     When I fill in my details and accept the terms
     And I click “Submit”
     Then I should be able to choose one of the 4 images
-    And the resolution of the saved file should be 2056 x 136
+    And the resolution of the saved file should be 2056 x 1368

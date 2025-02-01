@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test'
 import { Then } from './fixtures'
 import { getImageResolution } from '@lib/image_helper'
-import path from 'path'
 
 Then(
   'I should be able to choose one of the 4 images',
@@ -10,22 +9,27 @@ Then(
       .generatedImage()
       .nth(2)
       .click()
+    await createPage.elements.generatedImagesCarousel.nextButton().click()
   },
 )
 
 Then(
-  'the resolution of the saved file should be 2056 x 136',
-  async ({ createPage, page }) => {
+  'the resolution of the saved file should be 2056 x 1368',
+  async ({ createPage, page, $testInfo }) => {
     const downloadPromise = page.waitForEvent('download')
     await createPage.elements.downloadAndSharePanel.downloadButton().click()
     const download = await downloadPromise
-    const downloadPath = path.join(__dirname, download.suggestedFilename())
+
+    const downloadPath = $testInfo.outputPath(
+      'download',
+      download.suggestedFilename(),
+    )
     await download.saveAs(downloadPath)
     const { height, width } = await getImageResolution(downloadPath)
     expect(
       height,
       'The downloaded image did not have the correct height',
-    ).toEqual(136)
+    ).toEqual(1368)
     expect(
       width,
       'The downloaded image did not have the correct width',

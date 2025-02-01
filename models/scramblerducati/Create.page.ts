@@ -5,32 +5,36 @@ import { testEnvironments } from '@lib/test_environments'
 export default class CreatePage extends BasePage {
   elements = {
     imageGenerationPrompt: {
-      promptTextField: () =>
-        this.page.locator('[class*="xl:flex"] [name="prompt"]'),
-      heading: () => this.page.locator('[class="xl:hidden"] h1'),
+      promptTextField: () => this.page.locator('[name="prompt"]:visible'),
+      heading: () => this.page.locator('h1:visible'),
       generateButton: () =>
-        this.page.locator('[class*="xl:flex"] button').getByText('Generate'),
+        this.page.locator('button:visible').getByText('Generate'),
     },
     generatedImagesCarousel: {
       generatedImage: () =>
-        this.page.locator('[class*="xl:block"] img[alt="generated image"]'),
+        this.page.locator('img[alt="generated image"]:visible'),
       generatingImageMessage: () =>
-        this.page.getByText(
-          'Your Generation is in progress. It may take up to a minute.',
-        ),
-      nextButton: () => this.page.locator('button').getByText('Next'),
+        this.page
+          .locator('h2:visible')
+          .getByText(
+            'Your Generation is in progress. It may take up to a minute.',
+          ),
+      nextButton: () => this.page.locator('button:visible').getByText('Next'),
     },
     enterYourDetailsModal: {
-      firstNameField: () => this.page.locator('[name="firstName"]'),
-      lastNameField: () => this.page.locator('[name="lastName"]'),
-      emailField: () => this.page.locator('[name="email"]'),
-      countryDropdown: () => this.page.locator('select[name=country]'),
-      tAndCCheckbox: () => this.page.locator('#terms-check'),
-      privacyPolicyCheckbox: () => this.page.locator('#privacy-policy-check'),
-      submitButton: () => this.page.locator('button').getByText('Submit'),
+      firstNameField: () => this.page.locator('[name="firstName"]:visible'),
+      lastNameField: () => this.page.locator('[name="lastName"]:visible'),
+      emailField: () => this.page.locator('[name="email"]:visible'),
+      countryDropdown: () => this.page.locator('select[name=country]:visible'),
+      tAndCCheckbox: () => this.page.locator('#terms-check:visible'),
+      privacyPolicyCheckbox: () =>
+        this.page.locator('#privacy-policy-check:visible'),
+      submitButton: () =>
+        this.page.locator('button:visible').getByText('Submit'),
     },
     downloadAndSharePanel: {
-      downloadButton: () => this.page.locator('button').getByText('DOWNLOAD'),
+      downloadButton: () =>
+        this.page.locator('button:visible').getByText('DOWNLOAD'),
     },
   }
 
@@ -65,14 +69,15 @@ export default class CreatePage extends BasePage {
   }
 
   async waitForImageGenerationToComplete() {
+    const timeout = 60_000
     await expect(
       this.elements.generatedImagesCarousel.generatingImageMessage(),
       'Image generation did not start',
-    ).toBeVisible()
+    ).toBeVisible({ timeout })
     await expect(
       this.elements.generatedImagesCarousel.generatingImageMessage(),
       'Image generation did not complete',
-    ).not.toBeVisible()
+    ).not.toBeVisible({ timeout })
   }
 
   async generateImage({ prompt }: { prompt: string }) {
