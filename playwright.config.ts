@@ -8,6 +8,7 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   testDir,
+  workers: 1,
   reporter: [
     ['html', { outputFolder: 'test-results' }],
     // cucumberReporter('html', {
@@ -19,5 +20,9 @@ export default defineConfig({
     screenshot: 'on',
     trace: 'on',
     headless: false,
+    viewport: { width: 1920, height: 1080 },
+  },
+  expect: {
+    timeout: 20_000,
   },
 })

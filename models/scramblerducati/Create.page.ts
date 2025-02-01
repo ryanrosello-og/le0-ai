@@ -5,22 +5,15 @@ import { testEnvironments } from '@lib/test_environments'
 export default class CreatePage extends BasePage {
   elements = {
     imageGenerationPrompt: {
-      container: () => this.page.locator('[class="xl:hidden"] '),
       promptTextField: () =>
-        this.elements.imageGenerationPrompt
-          .container()
-          .locator("[name='prompt']"),
-      heading: () =>
-        this.elements.imageGenerationPrompt.container().locator('h1'),
+        this.page.locator('[class*="xl:flex"] [name="prompt"]'),
+      heading: () => this.page.locator('[class="xl:hidden"] h1'),
       generateButton: () =>
-        this.elements.imageGenerationPrompt
-          .container()
-          .locator('button')
-          .getByText('Generate'),
+        this.page.locator('[class*="xl:flex"] button').getByText('Generate'),
     },
     generatedImagesCarousel: {
       generatedImage: () =>
-        this.page.locator('[class="xl:hidden"] img[alt="generated image"]'),
+        this.page.locator('[class*="xl:block"] img[alt="generated image"]'),
       generatingImageMessage: () =>
         this.page.getByText(
           'Your Generation is in progress. It may take up to a minute.',
