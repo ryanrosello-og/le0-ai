@@ -16,7 +16,6 @@ Then(
 Then(
   'the resolution of the saved file should be 2056 x 136',
   async ({ createPage, page }) => {
-    // TODO: need testInfo object to get the path to save the file
     const downloadPromise = page.waitForEvent('download')
     await createPage.elements.downloadAndSharePanel.downloadButton().click()
     const download = await downloadPromise
