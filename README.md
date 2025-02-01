@@ -2,6 +2,7 @@
 
 ```bash
 git clone https://github.com/ryanrosello-og/le0-ai.git
+cd .\le0-ai\
 pnpm install
 ```
 
@@ -19,5 +20,5 @@ Within the GWT feature files, some When steps include quoted text, such as When 
 
 - Organization of the step definitions could be better
 - For some reason the `playwright-bdd` library breaks when I try and add `@fixtures` to the `tsconfig` paths
-- I should be able speed up the `image_download.feature` spec by bypassing the need to complete the form e.g. in the localStorage set the key `leonardo_ai_user_has_registered` to `true`
+- The use of `:visible` in the locators is questionable
 - The GWTs could be further enhanced
