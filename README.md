@@ -1,6 +1,7 @@
 # Install
 
 ```bash
+git clone https://github.com/ryanrosello-og/le0-ai.git
 pnpm install
 ```
 
