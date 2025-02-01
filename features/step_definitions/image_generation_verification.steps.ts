@@ -37,7 +37,7 @@ Then('I should see the {string} page', async ({ createPage }, text: string) => {
   await expect(
     createPage.elements.imageGenerationPrompt.heading(),
     `The [${text}] panel was not shown`,
-  ).toHaveText(text)
+  ).toHaveText(text.toUpperCase())
 
   expect(createPage.currentUrl(), 'Incorrect route encountered').toContain(
     '/create',

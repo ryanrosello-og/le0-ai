@@ -5,16 +5,7 @@ import { testEnvironments } from '@lib/test_environments'
 export default class LandingPage extends BasePage {
   elements = {
     startToCreateButton: () =>
-      this.page.locator('a').getByText('Start to create'),
-    cookieConsentModal: {
-      modal: () =>
-        this.page.locator('[aria-describedby="onetrust-policy-text"]'),
-      acceptAllButton: () =>
-        this.elements.cookieConsentModal
-          .modal()
-          .locator('button')
-          .getByText('Accept All'),
-    },
+      this.page.locator('[class*="xl:block"] a[href="/create"]'),
   }
 
   constructor(page: Page) {
@@ -22,13 +13,7 @@ export default class LandingPage extends BasePage {
   }
 
   async goto() {
-    // handle the cookie consent modal
-    await this.page.addLocatorHandler(
-      this.elements.cookieConsentModal.modal(),
-      async () => {
-        await this.elements.cookieConsentModal.acceptAllButton().click()
-      },
-    )
+    await this.handleCookieConsentModal()
     await this.page.goto(testEnvironments.get().scramblerDucati)
   }
 }

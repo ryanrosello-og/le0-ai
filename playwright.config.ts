@@ -9,13 +9,15 @@ const testDir = defineBddConfig({
 export default defineConfig({
   testDir,
   reporter: [
-    cucumberReporter('html', {
-      outputFile: 'cucumber-report/index.html',
-      externalAttachments: true,
-    }),
+    ['html', { outputFolder: 'test-results' }],
+    // cucumberReporter('html', {
+    //   outputFile: 'cucumber-report/index.html',
+    //   externalAttachments: true,
+    // }),
   ],
   use: {
     screenshot: 'on',
     trace: 'on',
+    headless: false,
   },
 })

@@ -18,6 +18,14 @@ https://vitalets.github.io/playwright-bdd/#/getting-started/write-first-test
 [] global.d.types.ts
 [] tsconfig use alias for imports
 
+set local storage
+leonardo_ai_user_has_registered == true
+
+---
+
+set cookie consent
+OptanonAlertBoxClosed : 2025-02-01T04:49:39.657Z | new Date().toISOString()
+
 # assumptions
 
 # bad

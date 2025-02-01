@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "fmt": "prettier --write \"**/**/*.ts\"",
-    "test": "cross-env TEST_ENV=production npx bddgen && npx playwright test",
+    "test": "npx bddgen && cross-env TEST_ENV=production npx playwright test",
     "debug": "npx bddgen && npx playwright test --debug",
     "report": "npx http-server ./cucumber-report -c-1 -a localhost -o index.html"
   },

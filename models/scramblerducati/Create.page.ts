@@ -46,6 +46,7 @@ export default class CreatePage extends BasePage {
   }
 
   async goto() {
+    await this.handleCookieConsentModal()
     await this.page.goto(`${testEnvironments.get().scramblerDucati}/create`)
   }
 
