@@ -1,4 +1,3 @@
-import { Constants, ConstantsType } from '@lib/constants'
 import { testEnvironments } from '@lib/test_environments'
 import CreatePage from '@models/scramblerducati/Create.page'
 import LandingPage from '@models/scramblerducati/Landing.page'
@@ -8,7 +7,6 @@ type Fixtures = {
   landingPage: LandingPage
   createPage: CreatePage
   config: {
-    constants: ConstantsType
     testEnvironments: typeof testEnvironments
   }
 }
@@ -21,7 +19,7 @@ export const test = base.extend<Fixtures>({
     await use(new LandingPage(page))
   },
   config: async ({}: any, use) => {
-    await use({ constants: Constants, testEnvironments })
+    await use({ testEnvironments })
   },
 })
 
